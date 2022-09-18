@@ -1,1 +1,1 @@
-![image]{Exercise-01/ifconfig.png}
+![image](Exercise-01/ifconfig.png)
