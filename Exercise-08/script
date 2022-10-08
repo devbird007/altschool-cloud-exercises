@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd /home/vagrant/memory_logs
+
+touch logs.txt
+
+date >> logs.txt
+free -h >> logs.txt
+echo "---" >> logs.txt
+
+midnight=$(date +%H%M)
+email=marnuel.et@gmail.com
+#path=/home/vagrant/memory_logs/logs
+
+if [ "$midnight" -gt 0800 ];
+then
+        echo "Here is your memory report for the past day" | mutt -a logs.txt -s "Daily Report" \
+-- "$email" && rm logs.txt
+fi
