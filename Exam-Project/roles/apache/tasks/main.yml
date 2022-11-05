@@ -1,0 +1,16 @@
+---
+- name: Update my cache
+  apt:
+    update_cache: yes
+
+
+- name: Install the apache
+  apt: 
+    name: apache2
+    state: present
+  notify:
+    - Enable Apache
+    - Start Apache
+
+
+

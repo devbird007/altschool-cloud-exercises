@@ -1,0 +1,25 @@
+---
+- name: Validate Composer checksum
+  get_url:
+    checksum: "sha384:55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae"
+    dest: /usr/src/
+    url: https://getcomposer.org/installer
+  become: yes
+
+- name: Download and install Composer
+  shell: curl -sS https://getcomposer.org/installer | php
+  args:
+    chdir: /usr/src/
+    creates: /usr/local/bin/composer
+    warn: false
+  become: yes
+
+- name: Add Composer to global path
+  copy:
+    dest: /usr/local/bin/composer
+    group: root
+    mode: '0755'
+    owner: root
+    src: /usr/src/composer.phar
+    remote_src: yes
+  become: yes
